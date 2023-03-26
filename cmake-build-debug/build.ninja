@@ -79,6 +79,18 @@ build CMakeFiles/pixel_tracer.dir/square.c.obj: C_COMPILER__pixel_tracer_Debug C
   OBJECT_DIR = CMakeFiles\pixel_tracer.dir
   OBJECT_FILE_DIR = CMakeFiles\pixel_tracer.dir
 
+build CMakeFiles/pixel_tracer.dir/rectangle.c.obj: C_COMPILER__pixel_tracer_Debug C$:/Users/march/Documents/Formations/2022-2027$ EFREI$ -$ Prepa$ Intgr$ Section$ International/Semester$ 2/Algorithmics$ &$ Data$ Structure$ 1/pixel-tracer/rectangle.c || cmake_object_order_depends_target_pixel_tracer
+  DEP_FILE = CMakeFiles\pixel_tracer.dir\rectangle.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles\pixel_tracer.dir
+  OBJECT_FILE_DIR = CMakeFiles\pixel_tracer.dir
+
+build CMakeFiles/pixel_tracer.dir/polygon.c.obj: C_COMPILER__pixel_tracer_Debug C$:/Users/march/Documents/Formations/2022-2027$ EFREI$ -$ Prepa$ Intgr$ Section$ International/Semester$ 2/Algorithmics$ &$ Data$ Structure$ 1/pixel-tracer/polygon.c || cmake_object_order_depends_target_pixel_tracer
+  DEP_FILE = CMakeFiles\pixel_tracer.dir\polygon.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles\pixel_tracer.dir
+  OBJECT_FILE_DIR = CMakeFiles\pixel_tracer.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target pixel_tracer
@@ -87,7 +99,7 @@ build CMakeFiles/pixel_tracer.dir/square.c.obj: C_COMPILER__pixel_tracer_Debug C
 #############################################
 # Link the executable pixel_tracer.exe
 
-build pixel_tracer.exe: C_EXECUTABLE_LINKER__pixel_tracer_Debug CMakeFiles/pixel_tracer.dir/main.c.obj CMakeFiles/pixel_tracer.dir/point.c.obj CMakeFiles/pixel_tracer.dir/line.c.obj CMakeFiles/pixel_tracer.dir/circle.c.obj CMakeFiles/pixel_tracer.dir/square.c.obj
+build pixel_tracer.exe: C_EXECUTABLE_LINKER__pixel_tracer_Debug CMakeFiles/pixel_tracer.dir/main.c.obj CMakeFiles/pixel_tracer.dir/point.c.obj CMakeFiles/pixel_tracer.dir/line.c.obj CMakeFiles/pixel_tracer.dir/circle.c.obj CMakeFiles/pixel_tracer.dir/square.c.obj CMakeFiles/pixel_tracer.dir/rectangle.c.obj CMakeFiles/pixel_tracer.dir/polygon.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\pixel_tracer.dir

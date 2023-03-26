@@ -1,8 +1,11 @@
-//
-// Created by march on 3/22/2023.
-//
+#ifndef POINT_H
+#define POINT_H
 
-#ifndef PIXEL_TRACER_POINT_H
-#define PIXEL_TRACER_POINT_H
+struct point{
+    int px;
+    int py;
+};
 
-#endif //PIXEL_TRACER_POINT_H
+struct point *create_point(int px, int py);
+
+#endif

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/pixel-tracer.iml" filepath="$PROJECT_DIR$/.idea/pixel-tracer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pixel_tracer.iml" filepath="$PROJECT_DIR$/.idea/pixel_tracer.iml" />
     </modules>
   </component>
 </project>
