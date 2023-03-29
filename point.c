@@ -5,14 +5,17 @@
 #include <stdio.h>
 #include "point.h"
 
-struct point{
-    int px;
-    int py;
-};
+Point *create_point(int px, int py) {
+    Point p1;
+    p1.pos_x = px;
+    p1.pos_y = py;
+    return &p1;
+}
 
-struct point *create_point(int px, int py){
-    struct point *mypoint = malloc(sizeof(struct point));
-    mypoint->px = px;
-    mypoint->py = py;
-    return mypoint;
+void delete_point(Point * point){
+
+}
+
+void print_point(Point * p){
+    printf("The coordiantes of your point are : %d %d", p->pos_x, p->pos_y);
 }

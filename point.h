@@ -1,11 +1,13 @@
 #ifndef POINT_H
 #define POINT_H
 
-struct point{
-    int px;
-    int py;
-};
+typedef struct {
+    int pos_x;
+    int pos_y;
+} Point;
 
-struct point *create_point(int px, int py);
+Point *create_point(int px, int py);
+void delete_point(Point *);
+void print_point(Point *);
 
 #endif

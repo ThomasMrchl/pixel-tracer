@@ -6,10 +6,14 @@
 #include "square.h"
 #include "rectangle.h"
 #include "polygon.h"
+#include "shapes.h"
 
 int main(){
     char direction;
     char action;
+    Shape s1;
+
+    create_empty_shape(&s1);
 
     printf("Please select an action:\n");
     printf("   A- Add a shape:\n");
@@ -64,12 +68,11 @@ int main(){
         }
 
         if ((action)=='1') {
-            int x1, x2;
+            Point p1;
             printf("Enter the coordinates of the point x1 y1 :\n");
-            scanf("%d %d", &x1, &x2);
-            struct point *p = create_point(x1, x2);
-            printf("Point: (%d, %d)\n", p->px, p->py);
-            free(p);
+            scanf("%d %d", &p1.pos_x, &p1.pos_y);
+            print_point(&p1);
+
         } else if ((action)=='2'){
 
         } else if ((action)=='3'){
