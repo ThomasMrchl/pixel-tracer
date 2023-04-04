@@ -7,7 +7,7 @@ typedef struct {
 } Point;
 
 Point *create_point(int px, int py);
-void delete_point(Point *);
-void print_point(Point *);
+void delete_point(Point * point);
+void print_point(Point * p);
 
 #endif

@@ -11,9 +11,6 @@
 int main(){
     char direction;
     char action;
-    Shape s1;
-
-    create_empty_shape(&s1);
 
     printf("Please select an action:\n");
     printf("   A- Add a shape:\n");
@@ -68,12 +65,20 @@ int main(){
         }
 
         if ((action)=='1') {
-            Point p1;
-            printf("Enter the coordinates of the point x1 y1 :\n");
-            scanf("%d %d", &p1.pos_x, &p1.pos_y);
-            print_point(&p1);
+            int x1, y1;
+            printf("Enter the coordinates of your point : px py\n");
+            scanf("%d %d", &x1, &y1);
+            Point *p1 = create_point(x1, y1);
+            print_point(p1);
+
 
         } else if ((action)=='2'){
+            int x1, y1, x2, y2;
+            printf("Enter the coordinates of your points : x1 y1 x2 y2\n");
+            scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+            Line *l1 = create_line(x1, y1, x2, y2);
+            print_line(l1);
+            delete_line(l1);
 
         } else if ((action)=='3'){
 
