@@ -15,7 +15,7 @@ Line *create_line(int x1, int y1, int x2, int y2){
 }
 
 void print_line(Line * l){
-    printf("LINE %d %d %d %d", l->p1->pos_x, l->p1->pos_y, l->p2->pos_x, l->p2->pos_y);
+    printf("LINE : %d %d %d %d", l->p1->pos_x, l->p1->pos_y, l->p2->pos_x, l->p2->pos_y);
 }
 
 void delete_line(Line * line){

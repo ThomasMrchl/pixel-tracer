@@ -17,5 +17,5 @@ void delete_point(Point * point){
 }
 
 void print_point(Point * p){
-    printf("POINT %d %d\n", p->pos_x, p->pos_y);
+    printf("POINT : %d %d\n", p->pos_x, p->pos_y);
 }

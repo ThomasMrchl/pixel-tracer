@@ -8,6 +8,7 @@
 #include "polygon.h"
 #include "shapes.h"
 
+
 int main(){
     char direction;
     char action;
@@ -68,21 +69,24 @@ int main(){
             int x1, y1;
             printf("Enter the coordinates of your point : px py\n");
             scanf("%d %d", &x1, &y1);
-            Point *p1 = create_point(x1, y1);
-            print_point(p1);
-
+            Shape *s1 = create_point_shape(x1, y1);
+            print_shape(s1);
 
         } else if ((action)=='2'){
             int x1, y1, x2, y2;
             printf("Enter the coordinates of your points : x1 y1 x2 y2\n");
             scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
-            Line *l1 = create_line(x1, y1, x2, y2);
-            print_line(l1);
-            delete_line(l1);
+            Shape *s1 = create_line_shape(x1, y1, x2, y2);
+            print_shape(s1);
 
         } else if ((action)=='3'){
 
         } else if ((action)=='4'){
+            int x1, y1, length;
+            printf("Enter the coordinates of the left corner of your square and the size : x1 y1 size\n");
+            scanf("%d %d %d", &x1, &y1, &length);
+            Shape *s1 = create_square_shape(x1, y1, length);
+            print_shape(s1);
 
         } else if ((action)=='5'){
 

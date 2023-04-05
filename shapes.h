@@ -4,6 +4,10 @@
 
 #ifndef PIXEL_TRACER_SHAPES_H
 #define PIXEL_TRACER_SHAPES_H
+#include "point.h"
+#include "line.h"
+#include "square.h"
+
 typedef enum { POINT, LINE, SQUARE, RECTANGLE, CIRCLE, POLYGON} SHAPE_TYPE;
 
 typedef struct shape {
@@ -21,7 +25,5 @@ Shape *create_circle_shape(int px, int py, int radius);
 Shape *create_polygon_shape(int lst[], int n);
 void delete_shape(Shape * shape);
 void print_shape(Shape * shape);
-
-
 
 #endif //PIXEL_TRACER_SHAPES_H
