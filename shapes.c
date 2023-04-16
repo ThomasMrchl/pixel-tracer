@@ -38,6 +38,44 @@ Shape *create_square_shape(int px, int py, int length){
     return shp;
 }
 
+Shape *create_rectangle_shape(int px, int py, int width, int height){
+    Shape *shp = create_empty_shape(RECTANGLE);
+    Point *p1 = create_point(px, py);
+    Rectangle *r1= create_rectangle(p1, width, height);
+    shp->ptrShape=r1;
+    return shp;
+}
+
+Shape *create_circle_shape(int px, int py, int radius){
+    Shape *shp = create_empty_shape(CIRCLE);
+    Point *p1 = create_point(px, py);
+    Circle *c1 = create_circle(p1, radius);
+    shp->ptrShape = c1;
+    return shp;
+}
+
+Shape *create_polygon_shape(const int lst[], int n){
+    if (n % 2 != 0) {
+        printf("Error: The number of points in the polygon must be even.\n");
+        return NULL;
+    }
+
+    Polygon *poly = (Polygon *) malloc(sizeof(Polygon));
+    poly->points = (Point **) malloc(poly->n * sizeof(Point *));
+
+    int i;
+    for (i = 0; i < poly->n; i++) {
+        poly->points[i] = (Point *) malloc(sizeof(Point));
+        poly->points[i]->pos_x = lst[2*i];
+        poly->points[i]->pos_y = lst[2*i+1];
+    }
+
+    Shape *shp = create_empty_shape(POLYGON);
+    shp->ptrShape = poly;
+
+    return shp;
+}
+
 
 void delete_shape(Shape * shape){
     free(shape);
@@ -51,5 +89,11 @@ void print_shape(Shape * shape){
        print_line(shape->ptrShape);
    } else if (shape->shape_type == SQUARE){
        print_square(shape->ptrShape);
+   } else if (shape->shape_type == CIRCLE){
+       print_circle(shape->ptrShape);
+   } else if (shape->shape_type == RECTANGLE){
+       print_rectangle(shape->ptrShape);
+   } else if (shape->shape_type == POLYGON){
+       print_polygon(shape->ptrShape);
    }
 }

@@ -3,5 +3,21 @@ project(pixel_tracer C)
 
 set(CMAKE_C_STANDARD 11)
 
+include_directories(.)
+
 add_executable(pixel_tracer
-        main.c point.c point.h line.c line.h circle.c circle.h square.h square.c rectangle.h rectangle.c polygon.c polygon.h main.c main.c point.c shapes.h shapes.c)
+        circle.c
+        circle.h
+        line.c
+        line.h
+        main.c
+        point.c
+        point.h
+        polygon.c
+        polygon.h
+        rectangle.c
+        rectangle.h
+        shapes.c
+        shapes.h
+        square.c
+        square.h)

@@ -7,6 +7,9 @@
 #include "point.h"
 #include "line.h"
 #include "square.h"
+#include "circle.h"
+#include "rectangle.h"
+#include "polygon.h"
 
 typedef enum { POINT, LINE, SQUARE, RECTANGLE, CIRCLE, POLYGON} SHAPE_TYPE;
 
@@ -22,7 +25,7 @@ Shape *create_line_shape(int px1, int py1, int px2, int py2);
 Shape *create_square_shape(int px, int py, int length);
 Shape *create_rectangle_shape(int px, int py, int width, int height);
 Shape *create_circle_shape(int px, int py, int radius);
-Shape *create_polygon_shape(int lst[], int n);
+Shape *create_polygon_shape(const int lst[], int n);
 void delete_shape(Shape * shape);
 void print_shape(Shape * shape);
 
