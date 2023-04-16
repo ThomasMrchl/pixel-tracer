@@ -54,25 +54,10 @@ Shape *create_circle_shape(int px, int py, int radius){
     return shp;
 }
 
-Shape *create_polygon_shape(const int lst[], int n){
-    if (n % 2 != 0) {
-        printf("Error: The number of points in the polygon must be even.\n");
-        return NULL;
-    }
-
-    Polygon *poly = (Polygon *) malloc(sizeof(Polygon));
-    poly->points = (Point **) malloc(poly->n * sizeof(Point *));
-
-    int i;
-    for (i = 0; i < poly->n; i++) {
-        poly->points[i] = (Point *) malloc(sizeof(Point));
-        poly->points[i]->pos_x = lst[2*i];
-        poly->points[i]->pos_y = lst[2*i+1];
-    }
-
+Shape *create_polygon_shape(int lst[], int n){
     Shape *shp = create_empty_shape(POLYGON);
-    shp->ptrShape = poly;
-
+    Polygon *p1 = create_polygon(n);
+    shp->ptrShape = p1;
     return shp;
 }
 

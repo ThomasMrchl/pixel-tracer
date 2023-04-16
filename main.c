@@ -19,7 +19,7 @@ int main(){
     printf("   C - Delete a shape:\n");
     printf("   D- Drawing the shapes:\n");
     printf("   E- Help:\n");
-    printf("----------Your action----------");
+    printf("----------Your action----------\n");
     scanf(" %c", &direction);
 
 
@@ -104,8 +104,8 @@ int main(){
             int n;
             printf("Enter the number of points in order to build your polygon (must be an even number):\n");
             scanf("%d", &n);
-            int *l1 = (int*)malloc(sizeof(int)*n);
-            Shape *s1 = create_polygon_shape(l1, n);
+            Point *lst;
+            Shape *s1 = create_polygon_shape(lst ,n);
             print_shape(s1);
         } else {
 
