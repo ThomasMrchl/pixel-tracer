@@ -56,14 +56,9 @@ Shape *create_circle_shape(int px, int py, int radius){
 
 Shape *create_polygon_shape(int lst[], int n){
     Shape *shp = create_empty_shape(POLYGON);
-    Polygon *p1 = create_polygon(n);
-    shp->ptrShape = p1;
+    Polygon *poly = create_polygon(n);
+    shp->ptrShape = poly;
     return shp;
-}
-
-
-void delete_shape(Shape * shape){
-    free(shape);
 }
 
 void print_shape(Shape * shape){

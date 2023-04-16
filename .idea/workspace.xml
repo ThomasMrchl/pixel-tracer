@@ -28,6 +28,7 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+    <option name="clangWarnings" value="-Wno-unused-variable,-Wno-infinite-recursion,-Wno-array-bounds,-Werror=implicit-function-declaration,-Wshadow,-Wno-shadow-field-in-constructor-modified,-Wno-shadow-ivar,-Wuninitialized,-Wunused-label,-Wunused-lambda-capture,-Wno-pointer-to-int-cast" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
@@ -83,7 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1681653213235</updated>
       <workItem from="1681653216543" duration="21000" />
-      <workItem from="1681676972849" duration="2909000" />
+      <workItem from="1681676972849" duration="4921000" />
     </task>
     <servers />
   </component>

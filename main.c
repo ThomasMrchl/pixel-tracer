@@ -102,11 +102,8 @@ int main(){
 
         } else if ((action)=='6'){
             int n;
-            printf("Enter the number of points in order to build your polygon (must be an even number):\n");
+            printf("Enter the number of points in your polygon (must be an even number)\n");
             scanf("%d", &n);
-            Point *lst;
-            Shape *s1 = create_polygon_shape(lst ,n);
-            print_shape(s1);
         } else {
 
         }
