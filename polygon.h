@@ -5,7 +5,7 @@
 #include "point.h"
 #ifndef PIXEL_TRACER_POLYGON_H
 #define PIXEL_TRACER_POLYGON_H
-
+//LE CUL
 typedef struct polygon {
     int n;
     Point ** points;
