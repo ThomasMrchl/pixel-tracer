@@ -8,7 +8,6 @@
 #include "polygon.h"
 #include "shapes.h"
 
-
 int main(){
     char direction;
     char action;
@@ -22,8 +21,6 @@ int main(){
     printf("----------Your action----------\n");
     scanf(" %c", &direction);
 
-
-
     while (((direction<65) || (direction>69))){
 
         printf("Please select an action:\n");
@@ -34,9 +31,7 @@ int main(){
         printf("   E- Help:\n");
         printf("----------Your action----------\n");
         scanf(" %c", &direction);
-
     }
-
 
     if (direction=='A') {
         printf("Please select an action:\n");
@@ -104,6 +99,8 @@ int main(){
             int n;
             printf("Enter the number of points in your polygon (must be an even number)\n");
             scanf("%d", &n);
+            Shape *s1 = create_polygon_shape(n);
+            print_shape(s1);
         } else {
 
         }

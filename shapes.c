@@ -54,7 +54,7 @@ Shape *create_circle_shape(int px, int py, int radius){
     return shp;
 }
 
-Shape *create_polygon_shape(int lst[], int n){
+Shape *create_polygon_shape(int n){
     Shape *shp = create_empty_shape(POLYGON);
     Polygon *poly = create_polygon(n);
     shp->ptrShape = poly;
@@ -62,7 +62,6 @@ Shape *create_polygon_shape(int lst[], int n){
 }
 
 void print_shape(Shape * shape){
-    printf("%d ", shape->id);
    if (shape->shape_type == POINT){
        print_point(shape->ptrShape);
    } else if (shape->shape_type == LINE){
