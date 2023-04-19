@@ -18,7 +18,6 @@ void delete_square(Square * square){
 }
 
 void print_square(Square * square){
-    printf(" SQUARE :");
+    printf(" SQUARE : Size : %d ", square->n);
     print_point(square->p1);
-    printf(" %d", square->n);
 }
