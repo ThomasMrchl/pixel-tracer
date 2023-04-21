@@ -10,11 +10,12 @@
 #include "circle.h"
 #include "rectangle.h"
 #include "polygon.h"
+#include "id.h"
 
 typedef enum { POINT, LINE, SQUARE, RECTANGLE, CIRCLE, POLYGON} SHAPE_TYPE;
 
 typedef struct shape {
-    int id;
+    unsigned int shape_id;
     SHAPE_TYPE shape_type;
     void *ptrShape;
 }Shape;

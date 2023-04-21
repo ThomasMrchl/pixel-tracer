@@ -10,7 +10,7 @@ Shape *create_empty_shape(SHAPE_TYPE shape_type)
 {
     Shape *shp = (Shape *) malloc(sizeof(Shape));
     shp->ptrShape = NULL;
-    shp->id = 1;
+    shp->shape_id = get_next_id();
     shp->shape_type = shape_type;
     return shp;
 }
@@ -62,6 +62,7 @@ Shape *create_polygon_shape(int n){
 }
 
 void print_shape(Shape * shape){
+   printf("ID : %d ", shape->shape_id);
    if (shape->shape_type == POINT){
        print_point(shape->ptrShape);
    } else if (shape->shape_type == LINE){

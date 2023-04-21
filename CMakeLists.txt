@@ -20,4 +20,4 @@ add_executable(pixel_tracer
         shapes.c
         shapes.h
         square.c
-        square.h)
+        square.h id.c id.h)
