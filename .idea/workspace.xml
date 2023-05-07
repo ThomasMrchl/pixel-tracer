@@ -21,25 +21,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c755d91-8414-4e36-8b41-011ed29eb83e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/id.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/id.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/area.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/area.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pixel.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pixel.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-eb3b7f94ca1bbab6b19d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-9635666d04b771962c6e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-04-17T09-11-37-0985.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-pixel_tracer-Debug-3d4d310b5abdc5d15ada.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-e0571299de2182c8d184.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-04-21T09-48-22-0933.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-pixel_tracer-Debug-f84c39a455ce48e1c2c6.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/pixel_tracer.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/pixel_tracer.dir/main.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/pixel_tracer.dir/shapes.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/pixel_tracer.dir/shapes.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/pixel_tracer.dir/square.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/pixel_tracer.dir/square.c.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/pixel_tracer.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/pixel_tracer.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes.c" beforeDir="false" afterPath="$PROJECT_DIR$/shapes.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shapes.h" beforeDir="false" afterPath="$PROJECT_DIR$/shapes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/pixel_tracer.exe" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,9 +80,9 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="pixel_tracer" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="pixel_tracer" TARGET_NAME="pixel_tracer" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="pixel_tracer" RUN_TARGET_NAME="pixel_tracer">
@@ -113,7 +109,8 @@
       <workItem from="1681909453352" duration="14000" />
       <workItem from="1681910363465" duration="3884000" />
       <workItem from="1682057196634" duration="57000" />
-      <workItem from="1682069816063" duration="1656000" />
+      <workItem from="1682069816063" duration="2361000" />
+      <workItem from="1683478398303" duration="7225000" />
     </task>
     <servers />
   </component>
