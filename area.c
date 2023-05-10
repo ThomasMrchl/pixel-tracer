@@ -43,6 +43,7 @@ void delete_area(Area* area){
     free(area);
 }
 
+/*
 void draw_area(Area* area){
     for (int i=0; i<area->nb_shape; i++){
         //create_shape_to_pixel(area->shapes[i]);
@@ -53,4 +54,4 @@ void draw_area(Area* area){
 void print_area(Area* area){
     //utilisée plus tard
 }
-
+*/

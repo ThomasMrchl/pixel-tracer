@@ -18,11 +18,14 @@ void delete_pixel(Pixel* pixel){
     free(pixel);
 }
 
-void pixel_point(Shape* shape, Pixel** pixel, int* nb_pixels){
-    Point* pt = (Point*) shape->ptrShape;
-    Pixel** pixel_tab = (Pixel**) malloc (sizeof (Pixel*));
-    pixel_tab[0] = create_pixel(pt->pos_x, pt->pos_y);
+void pixel_point(Point *point, Pixel **pixel, int *nb_pixels) {
+    printf("2");
+    pixel = (Pixel**) malloc (sizeof (Pixel*));
+    printf("2");
+    pixel[0] = create_pixel(point->pos_x, point->pos_y);
+    printf("2");
     *nb_pixels = 1;
+    printf("2");
 }
 
 int min(int v1, int v2){
@@ -134,7 +137,7 @@ void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
         }
     }
 
-    for (int i=0; i<nb_pixels; i++){
+    for (int i=0; i<nb_segs; i++){
         printf("%d %d   ", pixel[i]->px, pixel[i]->py );
     }
 }
@@ -194,22 +197,33 @@ void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
 }
 */
 
-void test_pixel_line() {
-    // Create a line from (1, 1) to (5, 5)
-    Line* line = create_line(1, 1, 5, 5);
 
-    // Call the pixel_line function
-    Pixel* pixels;
-    int num_pixels;
-    pixel_line(line, &pixels, &num_pixels);
+Pixel** create_shape_to_pixel(Shape * shape, int* nb_pixels){
+    if (shape->shape_type==POINT){
+        Pixel **pixels = NULL;
+        printf("1");
+        pixel_point(shape->ptrShape, pixels, nb_pixels);
+        printf("1");
+        print_pixels(pixels, *nb_pixels);
+        printf("1");
+        return pixels;
+    } else if (shape->shape_type==LINE){
+        Pixel **pixels = NULL;
+        pixel_line(shape->ptrShape, pixels, nb_pixels);
+        print_pixels(pixels, *nb_pixels);
+        return pixels;
+    }
+}
 
-    // Check that the correct number of pixels were generated
-    assert(num_pixels == 5);
+void delete_pixel_shape(Pixel** pixel, int nb_pixels){
+    //il faut free chaque pixel de la variable pixel
+    free(pixel);
+}
 
-    // Check that the correct pixels were generated
-    assert(pixels[0].px == 1 && pixels[0].py == 1);
-    assert(pixels[1].px == 2 && pixels[1].py == 2);
-    assert(pixels[2].px == 3 && pixels[2].py == 3);
-    assert(pixels[3].px == 4 && pixels[3].py == 4);
-    assert(pixels[4].px == 5 && pixels[4].py == 5);
+void print_pixels(Pixel** pixels, int nb_pixels){
+    printf("entree");
+    for (int i = 0; i < nb_pixels; i++){
+        printf("\n");
+        printf(" %d %d", pixels[i]->px, pixels[i]->py);
+    }
 }

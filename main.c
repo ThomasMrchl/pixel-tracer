@@ -7,8 +7,8 @@
 #include "rectangle.h"
 #include "polygon.h"
 #include "shapes.h"
-#include "pixel.c"
-#include "area.c"
+#include "pixel.h"
+#include "area.h"
 #include <stdbool.h>
 
 int main() {
@@ -75,7 +75,8 @@ int main() {
                 printf("Enter the coordinates of your point : px py\n");
                 scanf("%d %d", &x1, &y1);
                 Shape *s1 = create_point_shape(x1, y1);
-                print_shape(s1);
+                int* nb_pixels=0;
+                Pixel** p1 = create_shape_to_pixel(s1, nb_pixels);
 
 
             } else if ((action) == '2') {
