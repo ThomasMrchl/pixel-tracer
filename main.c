@@ -7,6 +7,8 @@
 #include "rectangle.h"
 #include "polygon.h"
 #include "shapes.h"
+#include "pixel.c"
+#include "area.c"
 #include <stdbool.h>
 
 int main() {

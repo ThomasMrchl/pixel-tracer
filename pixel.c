@@ -2,8 +2,10 @@
 // Created by march on 5/7/2023.
 //
 
+#include <assert.h>
 #include "pixel.h"
 #include "stdlib.h"
+#include "stdio.h"
 
 Pixel* create_pixel(int px, int py){
     Pixel *p1 = (Pixel*)malloc(sizeof (Pixel));
@@ -39,6 +41,106 @@ int max(int v1, int v2){
     }
 }
 
+void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
+    int x1 = line->p1->pos_x;
+    int y1 = line->p1->pos_y;
+    int x2 = line->p2->pos_x;
+    int y2 = line->p2->pos_y;
+
+    int dx = x2 - x1;
+    int dy = y2 - y1;
+
+    int dmin = min(dx, abs(dy));
+    int dmax = max(dx, abs(dy));
+
+    int nb_segs = dmin + 1;
+
+    int taille_de_base = (dmax + 1)/(dmin +1 );
+
+    int segments[nb_segs];
+
+    for (int i = 0; i < nb_segs; i++) {
+        segments[i] = taille_de_base;
+    }
+
+    int restants = (dmax + 1) % (dmin +1);
+
+    int *cumuls = (int*)malloc(nb_segs*sizeof(int));
+    cumuls[0]=0;
+    for (int i = 1; i < nb_segs ; i++){
+        cumuls[i] = ((i+1)*restants)%(dmin+1) < ((i*restants)%(dmin+1));
+        segments[i] = segments[i] + cumuls[i];
+    }
+
+    if (dy < 0){
+        if (dx > abs(dy)){
+            segments[0] = segments[0] - 1;
+            Pixel* p1 = create_pixel(x1, y1);
+            pixel[*nb_pixels] = p1;
+            (*nb_pixels)++;
+            for (int i=0; i<nb_segs-1;i++){
+                for (int j=0; j<nb_segs; j++){
+                    x1++;
+                    Pixel* p1 = create_pixel(x1, y1);
+                    pixel[*nb_pixels] = p1;
+                    (*nb_pixels)++;
+                }
+                y1--;
+            }
+        } else {
+            segments[0] = segments[0] - 1;
+            Pixel* p1 = create_pixel(x1, y1);
+            pixel[*nb_pixels] = p1;
+            (*nb_pixels)++;
+            for (int i=0; i<nb_segs-1;i++){
+                for (int j=0; j<nb_segs; j++){
+                    y1++;
+                    Pixel* p1 = create_pixel(x1, y1);
+                    pixel[*nb_pixels] = p1;
+                    (*nb_pixels)++;
+                }
+                x1--;
+            }
+        }
+    } else {
+        if (dx > dy){
+            segments[0] = segments[0] - 1;
+            Pixel* p1 = create_pixel(x1, y1);
+            pixel[*nb_pixels] = p1;
+            (*nb_pixels)++;
+            for (int i=0; i<nb_segs-1;i++){
+                for (int j=0; j<nb_segs; j++){
+                    x1++;
+                    Pixel* p1 = create_pixel(x1, y1);
+                    pixel[*nb_pixels] = p1;
+                    (*nb_pixels)++;
+                }
+                y1++;
+            }
+        } else {
+            segments[0] = segments[0] - 1;
+            Pixel *p1 = create_pixel(x1, y1);
+            pixel[*nb_pixels] = p1;
+            (*nb_pixels)++;
+            for (int i = 0; i < nb_segs - 1; i++) {
+                for (int j = 0; j < nb_segs; j++) {
+                    y1++;
+                    Pixel *p1 = create_pixel(x1, y1);
+                    pixel[*nb_pixels] = p1;
+                    (*nb_pixels)++;
+                }
+                x1++;
+            }
+        }
+    }
+
+    for (int i=0; i<nb_pixels; i++){
+        printf("%d %d   ", pixel[i]->px, pixel[i]->py );
+    }
+}
+
+
+/*
 void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
     int x1 = line->p1->pos_x;
     int y1 = line->p1->pos_y;
@@ -90,4 +192,24 @@ void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
     pixel = realloc(pixel, (*nb_pixels) * sizeof(Pixel*));
     pixel[*nb_pixels-1] = p;
 }
+*/
 
+void test_pixel_line() {
+    // Create a line from (1, 1) to (5, 5)
+    Line* line = create_line(1, 1, 5, 5);
+
+    // Call the pixel_line function
+    Pixel* pixels;
+    int num_pixels;
+    pixel_line(line, &pixels, &num_pixels);
+
+    // Check that the correct number of pixels were generated
+    assert(num_pixels == 5);
+
+    // Check that the correct pixels were generated
+    assert(pixels[0].px == 1 && pixels[0].py == 1);
+    assert(pixels[1].px == 2 && pixels[1].py == 2);
+    assert(pixels[2].px == 3 && pixels[2].py == 3);
+    assert(pixels[3].px == 4 && pixels[3].py == 4);
+    assert(pixels[4].px == 5 && pixels[4].py == 5);
+}
