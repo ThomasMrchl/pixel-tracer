@@ -10,7 +10,7 @@
 Line *create_line(int x1, int y1, int x2, int y2){
     Line *l1 = (Line *) malloc(sizeof(Line));
     l1->p1 = create_point(x1, y1);
-    l1->p2 = create_point(x1, y2);
+    l1->p2 = create_point(x2, y2);
     return l1;
 }
 

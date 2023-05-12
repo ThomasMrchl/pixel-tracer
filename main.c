@@ -74,7 +74,7 @@ int main() {
                 printf("Enter the coordinates of your point : px py\n");
                 scanf("%d %d", &x1, &y1);
                 Shape *s1 = create_point_shape(x1, y1);
-                int* nb_pixels=0;
+                int nb_pixels=0;
                 Pixel** p1 = create_shape_to_pixel(s1, nb_pixels);
                 print_shape(s1);
 
@@ -84,7 +84,7 @@ int main() {
                 printf("Enter the coordinates of your points : x1 y1 x2 y2\n");
                 scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
                 Shape *s1 = create_line_shape(x1, y1, x2, y2);
-                int* nb_pixels=0;
+                int nb_pixels=0;
                 Pixel** p1 = create_shape_to_pixel(s1, nb_pixels);
                 print_shape(s1);
 

@@ -18,12 +18,12 @@ void delete_pixel(Pixel* pixel){
     free(pixel);
 }
 
-void pixel_point(Point *point, Pixel **pixel, int *nb_pixels) {
+void pixel_point(Point *point, Pixel **pixel, int nb_pixels) {
     pixel = (Pixel**) malloc (sizeof (Pixel*));
     pixel[0] = create_pixel(point->pos_x, point->pos_y);
     printf("\n");
     printf("%d %d \n", pixel[0]->px, pixel[0]->py);
-    nb_pixels = (int *) 1;
+    nb_pixels = 1;
 }
 
 int min(int v1, int v2){
@@ -42,7 +42,7 @@ int max(int v1, int v2){
     }
 }
 
-void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
+void pixel_line(Line* line, Pixel** pixel, int nb_pixels){
     int x1 = line->p1->pos_x;
     int y1 = line->p1->pos_y;
     int x2 = line->p2->pos_x;
@@ -58,7 +58,6 @@ void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
 
     int taille_de_base = (dmax + 1)/(dmin +1 );
 
-
     int segments[nb_segs];
 
     for (int i = 0; i < nb_segs; i++) {
@@ -67,6 +66,11 @@ void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
 
     int restants = (dmax + 1) % (dmin +1);
 
+    nb_pixels = nb_segs * taille_de_base + restants;
+    printf("%d", nb_pixels);
+
+    pixel = (Pixel **) malloc(sizeof(Pixel*) * nb_pixels);
+
     int *cumuls = (int*)malloc(nb_segs*sizeof(int));
     cumuls[0]=0;
     for (int i = 1; i < nb_segs ; i++){
@@ -74,35 +78,30 @@ void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
         segments[i] = segments[i] + cumuls[i];
     }
 
-
     if (dy < 0){
         if (dx > abs(dy)){
+            int idx = 0;
             segments[0] = segments[0] - 1;
             Pixel* p1 = create_pixel(x1, y1);
-            pixel[*nb_pixels] = p1;
-            (*nb_pixels)++;
-            printf("cc");
+            pixel[nb_pixels] = p1;
             for (int i=0; i<nb_segs-1;i++){
-                for (int j=0; j<nb_segs; j++){
+                for (int j=0; j<segments[i]; j++){
                     x1++;
                     Pixel* p1 = create_pixel(x1, y1);
-                    pixel[*nb_pixels] = p1;
-                    (*nb_pixels)++;
+                    pixel[idx] = p1;
                 }
                 y1--;
             }
         } else {
             segments[0] = segments[0] - 1;
             Pixel* p1 = create_pixel(x1, y1);
-            pixel[*nb_pixels] = p1;
-            (*nb_pixels)++;
+            pixel[nb_pixels] = p1;
             printf("cc");
             for (int i=0; i<nb_segs-1;i++){
-                for (int j=0; j<nb_segs; j++){
+                for (int j=0; j<segments[i]; j++){
                     y1++;
                     Pixel* p1 = create_pixel(x1, y1);
-                    pixel[*nb_pixels] = p1;
-                    (*nb_pixels)++;
+                    pixel[nb_pixels] = p1;
                 }
                 x1--;
             }
@@ -111,42 +110,40 @@ void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
         if (dx > dy){
             segments[0] = segments[0] - 1;
             Pixel* p1 = create_pixel(x1, y1);
-            pixel[*nb_pixels] = p1;
-            (*nb_pixels)++;
+            pixel[nb_pixels] = p1;
             printf("cc");
             for (int i=0; i<nb_segs-1;i++){
-                for (int j=0; j<nb_segs; j++){
+                for (int j=0; j<segments[i]; j++){
                     x1++;
                     Pixel* p1 = create_pixel(x1, y1);
-                    pixel[*nb_pixels] = p1;
-                    (*nb_pixels)++;
+                    pixel[nb_pixels] = p1;
                 }
                 y1++;
             }
         } else {
             segments[0] = segments[0] - 1;
             Pixel *p1 = create_pixel(x1, y1);
-            pixel[*nb_pixels] = p1;
-            (*nb_pixels)++;
+            pixel[nb_pixels] = p1;
             printf("cc");
             for (int i = 0; i < nb_segs - 1; i++) {
-                for (int j = 0; j < nb_segs; j++) {
+                for (int j = 0; j<segments[i]; j++) {
                     y1++;
                     Pixel *p1 = create_pixel(x1, y1);
-                    pixel[*nb_pixels] = p1;
-                    (*nb_pixels)++;
+                    pixel[nb_pixels] = p1;
                 }
                 x1++;
             }
         }
     }
 
-    for (int i=0; i<nb_segs; i++){
-        printf("%d %d   ", pixel[i]->px, pixel[i]->py );
+    printf("pixels :");
+    for (int i=0; i<nb_pixels; i++){
+        printf(" %d %d \n", pixel[i]->px, pixel[i]->py );
     }
+
 }
 
-Pixel** create_shape_to_pixel(Shape * shape, int* nb_pixels){
+Pixel** create_shape_to_pixel(Shape * shape, int nb_pixels){
     if (shape->shape_type==POINT){
         Pixel **pixels = NULL;
         pixel_point(shape->ptrShape, pixels, nb_pixels);

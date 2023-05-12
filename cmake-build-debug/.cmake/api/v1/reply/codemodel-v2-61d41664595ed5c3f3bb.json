@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "pixel_tracer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-pixel_tracer-Debug-6fda74409c937fb0b685.json",
+					"jsonFile" : "target-pixel_tracer-Debug-9412257299a2dcb9279f.json",
 					"name" : "pixel_tracer",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/march/Documents/Formations/2022-2027 EFREI - Prepa Intgr Section International/Semester 2/Algorithmics & Data Structure 1/pixel-tracer/cmake-build-debug",
-		"source" : "C:/Users/march/Documents/Formations/2022-2027 EFREI - Prepa Intgr Section International/Semester 2/Algorithmics & Data Structure 1/pixel-tracer"
+		"build" : "C:/Users/march/Thomas/Formations/EFREI Paris 2022-2077/Semester 2/C/pixel-tracer/cmake-build-debug",
+		"source" : "C:/Users/march/Thomas/Formations/EFREI Paris 2022-2077/Semester 2/C/pixel-tracer"
 	},
 	"version" : 
 	{
