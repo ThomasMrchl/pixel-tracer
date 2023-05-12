@@ -19,7 +19,6 @@ void pixel_point(Point* point, Pixel **pixel, int *nb_pixels);
 void pixel_line(Line* line, Pixel** pixel, int* nb_pixels);
 Pixel** create_shape_to_pixel(Shape * shape, int* nb_pixels);
 void delete_pixel_shape(Pixel** pixel, int nb_pixels);
-void print_pixels(Pixel** pixels, int nb_pixels);
 
 
 #endif //PIXEL_TRACER_PIXEL_H
