@@ -83,9 +83,10 @@ int main() {
                 int x1, y1, x2, y2;
                 printf("Enter the coordinates of your points : x1 y1 x2 y2\n");
                 scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+                Area *a1 = create_area(50, 50);
                 Shape *s1 = create_line_shape(x1, y1, x2, y2);
-                int nb_pixels=0;
-                Pixel** p1 = create_shape_to_pixel(s1, nb_pixels);
+                add_shape_to_area(a1, s1);
+                draw_area(a1);
                 print_shape(s1);
 
 
