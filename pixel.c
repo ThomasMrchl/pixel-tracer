@@ -18,12 +18,12 @@ void delete_pixel(Pixel* pixel){
     free(pixel);
 }
 
-void pixel_point(Point *point, Pixel **pixel, int nb_pixels) {
+void pixel_point(Point *point, Pixel **pixel, int* nb_pixels) {
     pixel = (Pixel**) malloc (sizeof (Pixel*));
     pixel[0] = create_pixel(point->pos_x, point->pos_y);
     printf("\n");
     printf("%d %d \n", pixel[0]->px, pixel[0]->py);
-    nb_pixels = 1;
+    *nb_pixels = 1;
 }
 
 int min(int v1, int v2){
@@ -42,7 +42,7 @@ int max(int v1, int v2){
     }
 }
 
-void pixel_line(Line* line, Pixel** pixel, int nb_pixels){
+void pixel_line(Line* line, Pixel** pixel, int* nb_pixels){
     int x1 = line->p1->pos_x;
     int y1 = line->p1->pos_y;
     int x2 = line->p2->pos_x;
@@ -66,10 +66,10 @@ void pixel_line(Line* line, Pixel** pixel, int nb_pixels){
 
     int restants = (dmax + 1) % (dmin +1);
 
-    nb_pixels = nb_segs * taille_de_base + restants;
-    printf("%d", nb_pixels);
+    *nb_pixels = nb_segs * taille_de_base + restants;
+    printf("%d", *nb_pixels);
 
-    pixel = (Pixel **) malloc(sizeof(Pixel*) * nb_pixels);
+    pixel = (Pixel **) malloc(sizeof(Pixel*) * *nb_pixels);
 
     int *cumuls = (int*)malloc(nb_segs*sizeof(int));
     cumuls[0]=0;
@@ -144,13 +144,13 @@ void pixel_line(Line* line, Pixel** pixel, int nb_pixels){
         }
     }
 
-    printf("pixels :");
-    for (int i=0; i<nb_pixels; i++){
+    printf(" pixels :\n");
+    for (int i=0; i<*nb_pixels; i++){
         printf(" %d %d \n", pixel[i]->px, pixel[i]->py );
     }
 }
 
-Pixel** create_shape_to_pixel(Shape * shape, int nb_pixels){
+Pixel** create_shape_to_pixel(Shape * shape, int* nb_pixels){
     if (shape->shape_type==POINT){
         Pixel **pixels = NULL;
         pixel_point(shape->ptrShape, pixels, nb_pixels);

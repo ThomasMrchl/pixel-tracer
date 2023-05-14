@@ -23,7 +23,6 @@ void add_shape_to_area(Area* area, Shape* shape);
 void clear_area(Area* area);
 void erase_area(Area* area);
 void delete_area(Area* area);
-int get_nb_pixel(Pixel** p1);
 int in_list(Pixel** p1, int nb_pixels, int x, int y);
 void draw_area(Area* area);
 void print_area(Area* area);
