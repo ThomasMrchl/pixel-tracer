@@ -12,7 +12,11 @@ Area* create_area(unsigned int width, unsigned int height){
     a1->height=height;
     a1->width=width;
     a1->nb_shape=0;
-    a1->mat[width][height];
+    BOOL** B1 = (BOOL**)malloc(sizeof(BOOL*) * width);
+    for (unsigned int i = 0; i < width; i++) {
+        B1[i] = (BOOL*)malloc(sizeof(BOOL) * height);
+    }
+    a1->mat = B1;
     return a1;
 }
 
@@ -58,15 +62,15 @@ int in_list(Pixel** p1, int nb_pixels, int x, int y){
 void draw_area(Area* area){
     for (int i=0; i < area->nb_shape; i++){
         if (area->shapes[i]->shape_type==POINT){
-            int *nb_pixels = NULL;
-            Pixel** p1 = create_shape_to_pixel(area->shapes[i], nb_pixels);
-        } else if (area->shapes[i]->shape_type==LINE){
-            int* nb_pixels = NULL;
-            Pixel** p1 = create_shape_to_pixel(area->shapes[i], nb_pixels);
-            printf("%d", *nb_pixels);
-            for (int j=0; j<area->width; j++){
-                for (int k=0; k<area->height; k++){
-                    if (in_list(p1, *nb_pixels, j, k)==1){
+            int nb_pixels;
+            Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
+        } else if (area->shapes[i]->shape_type == LINE) {
+            int nb_pixels;
+            Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
+
+            for (int j = 0; j < area->width; j++) {
+                for (int k = 0; k < area->height; k++) {
+                    if (in_list(p1, nb_pixels, j, k) == 1) {
                         area->mat[j][k] = 1;
                     } else {
                         area->mat[j][k] = 0;
@@ -78,6 +82,15 @@ void draw_area(Area* area){
 }
 
 void print_area(Area* area){
-    //utilisée plus tard
+    for (int i = 0 ; i<area->width ;i++){
+        for (int j = 0; j<area->height ;j++){
+            if (area->mat[i][j]==1){
+                printf("1");
+            } else {
+                printf("0");
+            }
+        }
+        printf("\n");
+    }
 }
 
