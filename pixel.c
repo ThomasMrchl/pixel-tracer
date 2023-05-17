@@ -156,6 +156,76 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
 
 }
 
+void pixel_circle(Circle* circle, Pixel*** pixel, int *nb_pixels){
+    int x=0, y=circle->radius, d=(circle->radius)-1;
+    printf(" test2");
+    //GET THE NUMBER OF PIXELS FOR MEMORY ALLOCATION
+    int total_pixels=0;
+    while(y>=x){
+        if(d>=(x*2)){
+            d-=2*x+1;
+            x++;
+            total_pixels+=8;
+        }
+        else if(d<2*(circle->radius-y)){
+            d+=2*y-1;
+            y--;
+            total_pixels+=8;
+        }
+        else {
+            d+=2*(y-x-1);
+            y--;
+            x++;
+            total_pixels+=8;
+        }}
+    printf("total pixels %d\n", total_pixels);
+    *nb_pixels = total_pixels;
+    *pixel = (Pixel **) malloc(sizeof(Pixel **)  * *nb_pixels);
+
+    //CREATE THE LIST OF PIXELS
+
+    int i=0;
+    x=0;
+    y=circle->radius;
+    d=(circle->radius)-1;
+    while (y>=x){
+        (*pixel)[i] = create_pixel(circle->p1->pos_x+x, circle->p1->pos_y+y);
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x+y, circle->p1->pos_y+x);
+        i++;
+        (*pixel)[i]=create_pixel(circle->p1->pos_x-x, circle->p1->pos_y+y);;
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x-y, circle->p1->pos_y+x);
+        i++;
+        (*pixel)[i]=create_pixel(circle->p1->pos_x+x, circle->p1->pos_y-y);
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x+y, circle->p1->pos_y-x);
+        i++;
+        (*pixel)[i]=create_pixel(circle->p1->pos_x-x, circle->p1->pos_y-y);
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x-y, circle->p1->pos_y-x);
+
+        i++;
+        if(d>=(x*2)){
+            d-=2*x+1;
+            x++;
+        }
+        else if(d<2*(circle->radius-y)){
+            d+=2*y-1;
+            y--;
+        }
+        else {
+            d+=2*(y-x-1);
+            y--;
+            x++;
+        }
+    }
+    /*printf(" pixels :\n");
+    for (i = 0; i < total_pixels; i++) {
+        printf("%d %d \n", (*pixel)[i]->px, (*pixel)[i]->py);
+    } //TEST FOR THE COORDINATES OF THE POINTS*/
+}
+
 Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){
     if (shape->shape_type==POINT){
         Pixel **pixels = NULL;
@@ -165,6 +235,11 @@ Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){
     } else if (shape->shape_type==LINE){
         Pixel **pixels = NULL;
         pixel_line(shape->ptrShape, &pixels, nb_pixels);
+        return pixels;
+    }
+    else if (shape->shape_type==CIRCLE){
+        Pixel **pixels = NULL;
+        pixel_circle(shape->ptrShape, &pixels, nb_pixels);
         return pixels;
     }
 }

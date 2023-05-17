@@ -78,6 +78,20 @@ void draw_area(Area* area){
                 }
             }
         }
+        else if (area->shapes[i]->shape_type == CIRCLE) {
+            int nb_pixels;
+            Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
+
+            for (int j = 0; j < area->width; j++) {
+                for (int k = 0; k < area->height; k++) {
+                    if (in_list(p1, nb_pixels, j, k) == 1) {
+                        area->mat[j][k] = 1;
+                    } else {
+                        area->mat[j][k] = 0;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -85,9 +99,9 @@ void print_area(Area* area){
     for (int i = 0 ; i<area->width ;i++){
         for (int j = 0; j<area->height ;j++){
             if (area->mat[i][j]==1){
-                printf("1");
+                printf(" #");
             } else {
-                printf("0");
+                printf(" .");
             }
         }
         printf("\n");

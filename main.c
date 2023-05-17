@@ -94,9 +94,13 @@ int main() {
 
             } else if ((action) == '3') {
                 int x1, y1, radius;
-                printf("Enter the coordiantes of the center of your circle and the radius : x1 y1 radius\n");
+                printf("Enter the coordinates of the center of your circle and the radius : x1 y1 radius\n");
                 scanf("%d %d %d", &x1, &y1, &radius);
+                Area *a1 = create_area(20, 20);
                 Shape *s1 = create_circle_shape(x1, y1, radius);
+                add_shape_to_area(a1, s1);
+                draw_area(a1);
+                print_area(a1);
                 print_shape(s1);
 
 

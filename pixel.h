@@ -17,6 +17,7 @@ int min(int v1,int v2);
 int max(int v1, int v2);
 void pixel_point(Shape* shape, Pixel*** pixel_tab, int* nb_pixels);
 void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels);
+void pixel_circle(Circle* circle, Pixel*** pixel, int *nb_pixels);
 Pixel** create_shape_to_pixel(Shape * shape, int* nb_pixels);
 void delete_pixel_shape(Pixel** pixel, int nb_pixels);
 
