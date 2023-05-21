@@ -18,10 +18,10 @@ void delete_pixel(Pixel* pixel){
     free(pixel);
 }
 
-void pixel_point(Shape *shape, Pixel ***pixel_tab, int *nb_pixels) {
-    Point* pt = (Point*) shape->ptrShape;
+void pixel_point(Point* point, Pixel*** pixel_tab, int* nb_pixels)
+{
     *pixel_tab = (Pixel**) malloc (sizeof (Pixel*));
-    *pixel_tab[0] = create_pixel(pt->pos_x, pt->pos_y);
+    (*pixel_tab)[0] = create_pixel(point->pos_x, point->pos_y);
     *nb_pixels = 1;
 }
 
@@ -48,8 +48,16 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
     int x2 = line->p2->pos_x;
     int y2 = line->p2->pos_y;
 
-    int dx = x2 - x1;
-    int dy = y2 - y1;
+    int dx;
+    int dy;
+
+    if (x2>x1){
+        dx = x2 - x1;
+        dy = y2 - y1;
+    } else {
+        dx = x1 - x2;
+        dy = y1 - y2;
+    }
 
     int dmin = min(dx, abs(dy));
     int dmax = max(dx, abs(dy));
@@ -153,8 +161,43 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
         printf(" %d %d \n", (*pixel)[i]->px, (*pixel)[i]->py);
     }
     */
-
 }
+
+void pixel_square(Square* square, Pixel*** pixel_tab, int* nb_pixels) {
+    int px = square->p1->pos_x;
+    int py = square->p1->pos_y;
+    int n = square->n;
+
+    printf("%d\n", *nb_pixels);
+
+    *pixel_tab = (Pixel **)malloc(sizeof(Pixel *) * n * 4);
+    for (int i = 0; i < n * 4; i++) {
+        (*pixel_tab)[i] = (Pixel *)malloc(sizeof(Pixel) * (n + 1));  // Add +1 for the null terminator
+    }
+
+    int index = 0;
+
+    Line* l1 = create_line(px, py, px, py + n);
+    pixel_line(l1, &((*pixel_tab)[index]), nb_pixels);
+    index += n + 1;
+    delete_line(l1);
+
+    Line* l2 = create_line(px, py + n, px + n, py + n);
+    pixel_line(l2, &((*pixel_tab)[index]), nb_pixels);
+    index += n + 1;
+    delete_line(l2);
+
+    Line* l3 = create_line(px + n, py + n, px + n, py);
+    pixel_line(l3, &((*pixel_tab)[index]), nb_pixels);
+    index += n + 1;
+    delete_line(l3);
+
+    Line* l4 = create_line(px, py, px + n, py);
+    pixel_line(l4, &((*pixel_tab)[index]), nb_pixels);
+    delete_line(l4);
+}
+
+
 
 Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){
     if (shape->shape_type==POINT){
@@ -165,6 +208,11 @@ Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){
     } else if (shape->shape_type==LINE){
         Pixel **pixels = NULL;
         pixel_line(shape->ptrShape, &pixels, nb_pixels);
+        return pixels;
+
+    } else if (shape->shape_type==SQUARE){
+        Pixel **pixels = NULL;
+        pixel_square(shape->ptrShape, &pixels, nb_pixels);
         return pixels;
     }
 }

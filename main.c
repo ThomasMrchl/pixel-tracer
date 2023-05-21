@@ -16,6 +16,8 @@ int main() {
     char action;
     bool selected = true;
 
+
+    Area *a1 = create_area(10, 30);
     while (selected == true) {
 
         printf("\n");
@@ -73,18 +75,17 @@ int main() {
                 int x1, y1;
                 printf("Enter the coordinates of your point : px py\n");
                 scanf("%d %d", &x1, &y1);
-                Area *a1 = create_area(50, 50);
                 Shape *s1 = create_point_shape(x1, y1);
                 add_shape_to_area(a1, s1);
                 draw_area(a1);
+                print_area(a1);
                 print_shape(s1);
 
 
-            } else if ((action) == '2') {
+            } else if ((action) == '2'){
                 int x1, y1, x2, y2;
                 printf("Enter the coordinates of your points : x1 y1 x2 y2\n");
                 scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
-                Area *a1 = create_area(20, 20);
                 Shape *s1 = create_line_shape(x1, y1, x2, y2);
                 add_shape_to_area(a1, s1);
                 draw_area(a1);
@@ -105,8 +106,10 @@ int main() {
                 printf("Enter the coordinates of the left corner of your square and the size : x1 y1 size\n");
                 scanf("%d %d %d", &x1, &y1, &length);
                 Shape *s1 = create_square_shape(x1, y1, length);
+                add_shape_to_area(a1, s1);
+                draw_area(a1);
+                print_area(a1);
                 print_shape(s1);
-
 
             } else if ((action) == '5') {
                 int x1, y1, width, height;

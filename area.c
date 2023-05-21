@@ -16,6 +16,7 @@ Area* create_area(unsigned int width, unsigned int height){
     for (unsigned int i = 0; i < width; i++) {
         B1[i] = (BOOL*)malloc(sizeof(BOOL) * height);
     }
+
     a1->mat = B1;
     return a1;
 }
@@ -26,11 +27,11 @@ void add_shape_to_area(Area* area, Shape* shape){
 }
 
 void clear_area(Area* area){
-    int **matrix = malloc(area->height * sizeof(int *));
-    for (int i = 0; i < area->height; i++) {
-        matrix[i] = calloc(area->width, sizeof(int));
+    for (int j = 0; j < area->width; j++) {
+        for (int k = 0; k < area->height; k++) {
+            area->mat[j][k]=0;
+        }
     }
-    area->mat = matrix;
 }
 
 void erase_area(Area* area){
@@ -60,20 +61,39 @@ int in_list(Pixel** p1, int nb_pixels, int x, int y){
 }
 
 void draw_area(Area* area){
+    clear_area(area);
     for (int i=0; i < area->nb_shape; i++){
         if (area->shapes[i]->shape_type==POINT){
             int nb_pixels;
             Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
+            Point* p0 = area->shapes[i]->ptrShape;
+
+            for (int j = 0; j < area->width; j++) {
+                for (int k = 0; k < area->height; k++) {
+                    if ((j==p0->pos_x)&&(k==p0->pos_y)){
+                        area->mat[j][k]=1;
+                    }
+                }
+            }
+
         } else if (area->shapes[i]->shape_type == LINE) {
             int nb_pixels;
             Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
-
             for (int j = 0; j < area->width; j++) {
                 for (int k = 0; k < area->height; k++) {
                     if (in_list(p1, nb_pixels, j, k) == 1) {
                         area->mat[j][k] = 1;
-                    } else {
-                        area->mat[j][k] = 0;
+                    }
+                }
+            }
+
+        } else if (area->shapes[i]->shape_type==SQUARE){
+            int nb_pixels;
+            Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
+            for (int j = 0; j < area->width; j++) {
+                for (int k = 0; k < area->height; k++) {
+                    if (in_list(p1, nb_pixels, j, k) == 1) {
+                        area->mat[j][k] = 1;
                     }
                 }
             }
@@ -85,9 +105,9 @@ void print_area(Area* area){
     for (int i = 0 ; i<area->width ;i++){
         for (int j = 0; j<area->height ;j++){
             if (area->mat[i][j]==1){
-                printf("1");
+                printf("#");
             } else {
-                printf("0");
+                printf(".");
             }
         }
         printf("\n");
