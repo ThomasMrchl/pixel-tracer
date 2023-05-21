@@ -77,7 +77,6 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
     int nombre_total_pixel = nb_segs * taille_de_base + restants;
 
     *nb_pixels = nombre_total_pixel;
-    printf("%d\n", *nb_pixels);
 
     *pixel = (Pixel **) malloc(sizeof(Pixel **) * *nb_pixels);
 
@@ -168,33 +167,64 @@ void pixel_square(Square* square, Pixel*** pixel_tab, int* nb_pixels) {
     int py = square->p1->pos_y;
     int n = square->n;
 
-    printf("%d\n", *nb_pixels);
+    int tempo_nb_pixels;
 
     *pixel_tab = (Pixel **)malloc(sizeof(Pixel *) * n * 4);
-    for (int i = 0; i < n * 4; i++) {
-        (*pixel_tab)[i] = (Pixel *)malloc(sizeof(Pixel) * (n + 1));  // Add +1 for the null terminator
-    }
 
-    int index = 0;
+    Pixel **pixels_bis = NULL;
+    pixels_bis = (Pixel **) malloc(sizeof(Pixel *) * (n+1)*4);
 
     Line* l1 = create_line(px, py, px, py + n);
-    pixel_line(l1, &((*pixel_tab)[index]), nb_pixels);
-    index += n + 1;
+    pixel_line(l1, &pixels_bis, nb_pixels);
+
+    tempo_nb_pixels = *nb_pixels;
+    printf("tmp nb pixels : %d", tempo_nb_pixels);
+
+    for (int i = 0; i < tempo_nb_pixels; i++) {
+        (*pixel_tab)[i] = pixels_bis[i];
+        printf(" 1 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
+    }
+
     delete_line(l1);
 
     Line* l2 = create_line(px, py + n, px + n, py + n);
-    pixel_line(l2, &((*pixel_tab)[index]), nb_pixels);
-    index += n + 1;
+    pixel_line(l2, &pixels_bis, nb_pixels);
+
+    for (int i = tempo_nb_pixels; i < 2*tempo_nb_pixels; i++) {
+        (*pixel_tab)[i] = pixels_bis[i - tempo_nb_pixels];
+        printf(" 2 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
+    }
+
     delete_line(l2);
 
-    Line* l3 = create_line(px + n, py + n, px + n, py);
-    pixel_line(l3, &((*pixel_tab)[index]), nb_pixels);
-    index += n + 1;
+    Line* l3 = create_line(px + n, py, px + n, py + n);
+    pixel_line(l3, &pixels_bis, nb_pixels);
+
+    for (int i = 2*tempo_nb_pixels; i < 3*tempo_nb_pixels; i++) {
+        (*pixel_tab)[i] = pixels_bis[i - 2*tempo_nb_pixels];
+        printf(" 3 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
+    }
+
     delete_line(l3);
 
     Line* l4 = create_line(px, py, px + n, py);
-    pixel_line(l4, &((*pixel_tab)[index]), nb_pixels);
+    pixel_line(l4, &pixels_bis, nb_pixels);
+
+    for (int i=3*tempo_nb_pixels; i<4*tempo_nb_pixels ;i++){
+        (*pixel_tab)[i] = pixels_bis[i - 3*tempo_nb_pixels];
+        printf(" 4 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
+    }
+
     delete_line(l4);
+
+    *nb_pixels = (n+1)*4;
+
+    free(pixels_bis);
+
+    printf("--------------------------------------------------------\n");
+    for (int i = 0; i < *nb_pixels; i++) {
+        printf(" %d %d \n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
+    }
 }
 
 
