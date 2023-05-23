@@ -12,8 +12,11 @@ Polygon *create_polygon(int n){
     p1->points = (Point**)malloc(sizeof (Point)*n);
     p1->n = n;
     int i=0;
+    int x,y;
     while (i<n){
-        p1->points[i] = create_point(1, 1);
+        printf("Enter your point coordinates: x y \n");
+        scanf("%d %d",&x,&y);
+        p1->points[i] = create_point(x, y);
         i++;
     }
     return p1;

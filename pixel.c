@@ -6,6 +6,7 @@
 #include "pixel.h"
 #include "stdlib.h"
 #include "stdio.h"
+#include "area.h"
 
 Pixel* create_pixel(int px, int py){
     Pixel *p1 = (Pixel*)malloc(sizeof (Pixel));
@@ -47,9 +48,14 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
     int y1 = line->p1->pos_y;
     int x2 = line->p2->pos_x;
     int y2 = line->p2->pos_y;
-
-    int dx = x2 - x1;
-    int dy = y2 - y1;
+    int dx,dy;
+    if (x2>x1){
+        dx = x2 - x1;
+        dy = y2 - y1;
+    } else {
+        dx = x1 - x2;
+        dy = y1 - y2;
+    }
 
     int dmin = min(dx, abs(dy));
     int dmax = max(dx, abs(dy));
@@ -69,7 +75,7 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
     int nombre_total_pixel = nb_segs * taille_de_base + restants;
 
     *nb_pixels = nombre_total_pixel;
-    printf("%d\n", *nb_pixels);
+    //printf("%d\n", *nb_pixels);
 
     *pixel = (Pixel **) malloc(sizeof(Pixel **) * *nb_pixels);
 
@@ -147,12 +153,12 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
         }
     }
 
-    /*
+
     printf(" pixels :\n");
     for (int i = 0; i < *nb_pixels; i++) {
         printf(" %d %d \n", (*pixel)[i]->px, (*pixel)[i]->py);
     }
-    */
+
 
 }
 
@@ -226,6 +232,13 @@ void pixel_circle(Circle* circle, Pixel*** pixel, int *nb_pixels){
     } //TEST FOR THE COORDINATES OF THE POINTS*/
 }
 
+void pixel_polygon(Polygon* polygon, Pixel*** pixel_tab, int* nb_pixels){
+    for(int i=0; i<polygon->n-1; i++){
+        pixel_line(create_line(polygon->points[i]->pos_x, polygon->points[i]->pos_y,polygon->points[i+1]->pos_x, polygon->points[i+1]->pos_y ), pixel_tab, nb_pixels);
+    }
+    pixel_line(create_line(polygon->points[polygon->n-1]->pos_x,polygon->points[polygon->n-1]->pos_y, polygon->points[0]->pos_x,polygon->points[0]->pos_y), pixel_tab, nb_pixels);
+    }
+
 Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){
     if (shape->shape_type==POINT){
         Pixel **pixels = NULL;
@@ -240,6 +253,11 @@ Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){
     else if (shape->shape_type==CIRCLE){
         Pixel **pixels = NULL;
         pixel_circle(shape->ptrShape, &pixels, nb_pixels);
+        return pixels;
+    }
+    else if (shape->shape_type==POLYGON){
+        Pixel **pixels = NULL;
+        pixel_polygon(shape->ptrShape, &pixels, nb_pixels);
         return pixels;
     }
 }

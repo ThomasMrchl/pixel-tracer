@@ -122,10 +122,14 @@ int main() {
 
             } else if ((action) == '6') {
                 int n;
-                printf("Enter the number of points in your polygon (must be an even number)\n");
+                printf("Enter the number of points in your polygon: \n");
                 scanf("%d", &n);
+                Area *a1 = create_area(20, 20);
                 Shape *s1 = create_polygon_shape(n);
+                add_shape_to_area(a1, s1);
+                draw_area(a1);
                 print_shape(s1);
+
 
             } else {
 
