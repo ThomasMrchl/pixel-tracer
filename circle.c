@@ -18,5 +18,5 @@ void delete_circle(Circle * circle){
 }
 
 void print_circle(Circle * circle){
-    printf("CIRCLE : %d %d  radius : %d", circle->p1->pos_x, circle->p1->pos_y, circle->radius);
+    printf("CIRCLE : %d %d  radius : %d\n", circle->p1->pos_x, circle->p1->pos_y, circle->radius);
 }

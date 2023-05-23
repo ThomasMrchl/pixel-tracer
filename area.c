@@ -1,11 +1,12 @@
 //
 // Created by march on 5/7/2023.
 //
-
 #include "area.h"
 #include "stdlib.h"
 #include "point.h"
 #include "stdio.h"
+#include "shapes.h"
+#include <stdbool.h>
 
 Area* create_area(unsigned int width, unsigned int height){
     Area *a1 = (Area*)malloc(sizeof(Area));
@@ -24,6 +25,26 @@ Area* create_area(unsigned int width, unsigned int height){
 void add_shape_to_area(Area* area, Shape* shape){
     area->shapes[area->nb_shape] = shape;
     area->nb_shape++;
+}
+
+void remove_shape_from_area(Area* area, int ID){
+    bool shapeFound = false;
+
+    for (int i = 0; i < area->nb_shape; i++){
+        if (area->shapes[i]->shape_id == ID){
+            delete_shape(area->shapes[i]->ptrShape);
+            for (int j = i; j < area->nb_shape - 1; j++){
+                area->shapes[j] = area->shapes[j+1];
+            }
+            area->nb_shape--;
+            shapeFound = true;
+            break;
+        }
+    }
+
+    if (!shapeFound){
+        printf("There is no id : %d\n", ID);
+    }
 }
 
 void clear_area(Area* area){
@@ -108,9 +129,41 @@ void draw_area(Area* area){
                     }
                 }
             }
+
+        } else if (area->shapes[i]->shape_type == CIRCLE) {
+            int nb_pixels;
+            Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
+            for (int j = 0; j < area->width; j++) {
+                for (int k = 0; k < area->height; k++) {
+                    if (in_list(p1, nb_pixels, j, k) == 1) {
+                        area->mat[j][k] = 1;
+                    }
+                }
+            }
+
+        } else if (area->shapes[i]->shape_type == POLYGON) {
+            int nb_pixels;
+            Pixel** p1 = create_shape_to_pixel(area->shapes[i], &nb_pixels);
+
+            for (int j = 0; j < area->width; j++) {
+                for (int k = 0; k < area->height; k++) {
+                    if (in_list(p1, nb_pixels, j, k) == 1) {
+                        area->mat[j][k] = 1;
+                    }
+                }
+            }
         }
+
+
     }
 }
+
+void display_shapes(Area* area){
+    for (int i=0; i<area->nb_shape; i++){
+        print_shape(area->shapes[i]);
+    }
+}
+
 
 void print_area(Area* area){
     for (int i = 0 ; i<area->width ;i++){

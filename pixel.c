@@ -51,12 +51,18 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
     int dx;
     int dy;
 
-    if (x2>x1){
-        dx = x2 - x1;
-        dy = y2 - y1;
-    } else {
+    if (x1>x2){
+        int x3=x1;
+        int y3=y1;
         dx = x1 - x2;
         dy = y1 - y2;
+        x1 = x2;
+        y1 = y2;
+        x2=x3;
+        y2=x3;
+    } else {
+        dx = x2 - x1;
+        dy = y2 - y1;
     }
 
     int dmin = min(dx, abs(dy));
@@ -221,12 +227,12 @@ void pixel_square(Square* square, Pixel*** pixel_tab, int* nb_pixels) {
 
     free(pixels_bis);
 
-    /*
+
     printf("--------------------------------------------------------\n");
     for (int i = 0; i < *nb_pixels; i++) {
         printf(" %d %d \n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
     }
-    */
+
 }
 
 void pixel_rectangle(Rectangle* rectangle, Pixel*** pixel_tab, int* nb_pixels){
@@ -249,7 +255,7 @@ void pixel_rectangle(Rectangle* rectangle, Pixel*** pixel_tab, int* nb_pixels){
     tempo_nb_pixels = *nb_pixels;
     printf("tmp nb pixels : %d\n", tempo_nb_pixels);
 
-    for (int i = 0; i < *nb_pixels; i++) {
+    for (int i = last_nb_pixels; i < tempo_nb_pixels; i++) {
         (*pixel_tab)[i] = pixels_bis[i];
         printf(" 1 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
     }
@@ -261,40 +267,44 @@ void pixel_rectangle(Rectangle* rectangle, Pixel*** pixel_tab, int* nb_pixels){
     Line* l2 = create_line(px, py + width, px + length, py + width);
     pixel_line(l2, &pixels_bis, nb_pixels);
 
-    printf("last : %d new : %d\n", last_nb_pixels, *nb_pixels);
+    tempo_nb_pixels += *nb_pixels;
 
-    for (int i = last_nb_pixels; i < *nb_pixels + last_nb_pixels; i++) {
+    printf("last : %d new : %d\n", last_nb_pixels, tempo_nb_pixels);
+
+    for (int i = last_nb_pixels; i < tempo_nb_pixels; i++) {
         (*pixel_tab)[i] = pixels_bis[i - last_nb_pixels];
         printf(" 2 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
     }
 
     delete_line(l2);
 
-    last_nb_pixels = *nb_pixels + last_nb_pixels;
+    last_nb_pixels = tempo_nb_pixels;
 
     Line* l3 = create_line(px + length, py, px + length, py + width);
     pixel_line(l3, &pixels_bis, nb_pixels);
 
-    printf("last : %d new : %d\n", last_nb_pixels, *nb_pixels + last_nb_pixels);
+    tempo_nb_pixels += *nb_pixels;
 
-    for (int i = last_nb_pixels; i < *nb_pixels + last_nb_pixels; i++) {
-        (*pixel_tab)[i] = pixels_bis[i - 2 * last_nb_pixels];
+    printf("last : %d new : %d\n", last_nb_pixels, tempo_nb_pixels);
+
+    for (int i = last_nb_pixels; i < tempo_nb_pixels; i++) {
+        (*pixel_tab)[i] = pixels_bis[i - last_nb_pixels];
         printf(" 3 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
     }
 
-    tempo_nb_pixels += *nb_pixels;
-
     delete_line(l3);
 
-    last_nb_pixels = *nb_pixels;
+    last_nb_pixels = tempo_nb_pixels;
 
     Line* l4 = create_line(px, py, px + length, py);
     pixel_line(l4, &pixels_bis, nb_pixels);
 
     tempo_nb_pixels += *nb_pixels;
 
-    for (int i = last_nb_pixels; i < *nb_pixels; i++){
-        (*pixel_tab)[i] = pixels_bis[i - 3 * last_nb_pixels];
+    printf("last : %d new : %d\n", last_nb_pixels, tempo_nb_pixels);
+
+    for (int i = last_nb_pixels; i < tempo_nb_pixels; i++){
+        (*pixel_tab)[i] = pixels_bis[i - last_nb_pixels];
         printf(" 4 pixel : %d %d\n", (*pixel_tab)[i]->px, (*pixel_tab)[i]->py);
     }
 
@@ -302,6 +312,106 @@ void pixel_rectangle(Rectangle* rectangle, Pixel*** pixel_tab, int* nb_pixels){
 
     *nb_pixels = tempo_nb_pixels;
 
+    free(pixels_bis);
+}
+
+void pixel_circle(Circle* circle, Pixel*** pixel, int *nb_pixels){
+    int x=0, y=circle->radius, d=(circle->radius)-1;
+    printf(" test2");
+    //GET THE NUMBER OF PIXELS FOR MEMORY ALLOCATION
+    int total_pixels=0;
+    while(y>=x){
+        if(d>=(x*2)){
+            d-=2*x+1;
+            x++;
+            total_pixels+=8;
+        }
+        else if(d<2*(circle->radius-y)){
+            d+=2*y-1;
+            y--;
+            total_pixels+=8;
+        }
+        else {
+            d+=2*(y-x-1);
+            y--;
+            x++;
+            total_pixels+=8;
+        }}
+    printf("total pixels %d\n", total_pixels);
+    *nb_pixels = total_pixels;
+    *pixel = (Pixel **) malloc(sizeof(Pixel **)  * *nb_pixels);
+
+    //CREATE THE LIST OF PIXELS
+
+    int i=0;
+    x=0;
+    y=circle->radius;
+    d=(circle->radius)-1;
+    while (y>=x){
+        (*pixel)[i] = create_pixel(circle->p1->pos_x+x, circle->p1->pos_y+y);
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x+y, circle->p1->pos_y+x);
+        i++;
+        (*pixel)[i]=create_pixel(circle->p1->pos_x-x, circle->p1->pos_y+y);;
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x-y, circle->p1->pos_y+x);
+        i++;
+        (*pixel)[i]=create_pixel(circle->p1->pos_x+x, circle->p1->pos_y-y);
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x+y, circle->p1->pos_y-x);
+        i++;
+        (*pixel)[i]=create_pixel(circle->p1->pos_x-x, circle->p1->pos_y-y);
+        i++;
+        (*pixel)[i]= create_pixel(circle->p1->pos_x-y, circle->p1->pos_y-x);
+
+        i++;
+        if(d>=(x*2)){
+            d-=2*x+1;
+            x++;
+        }
+        else if(d<2*(circle->radius-y)){
+            d+=2*y-1;
+            y--;
+        }
+        else {
+            d+=2*(y-x-1);
+            y--;
+            x++;
+        }
+    }
+    /*printf(" pixels :\n");
+    for (i = 0; i < total_pixels; i++) {
+        printf("%d %d \n", (*pixel)[i]->px, (*pixel)[i]->py);
+    } //TEST FOR THE COORDINATES OF THE POINTS*/
+}
+
+void pixel_polygon(Polygon* polygon, Pixel*** pixel_tab, int* nb_pixels) {
+    int tempo_nb_pixels = 0;
+    Pixel** pixels_bis = NULL;
+
+    *pixel_tab = (Pixel**)malloc(sizeof(Pixel*) * polygon->n * (*nb_pixels));
+
+    for (int i = 0; i < polygon->n; i++) {
+        Line* l1;
+        if (i < polygon->n - 1) {
+            l1 = create_line(polygon->points[i]->pos_x, polygon->points[i]->pos_y, polygon->points[i + 1]->pos_x, polygon->points[i + 1]->pos_y);
+        } else {
+            // Connect the last point with the first point to close the polygon
+            l1 = create_line(polygon->points[i]->pos_x, polygon->points[i]->pos_y, polygon->points[0]->pos_x, polygon->points[0]->pos_y);
+        }
+
+        pixel_line(l1, &pixels_bis, nb_pixels);
+
+        for (int j = 0; j < *nb_pixels; j++) {
+            (*pixel_tab)[tempo_nb_pixels + j] = pixels_bis[j];
+            printf("POINT : %d %d\n", (*pixel_tab)[tempo_nb_pixels + j]->px, (*pixel_tab)[tempo_nb_pixels + j]->py);
+        }
+
+        tempo_nb_pixels += *nb_pixels;
+        delete_line(l1);
+    }
+
+    *nb_pixels = tempo_nb_pixels;
     free(pixels_bis);
 }
 
@@ -325,6 +435,16 @@ Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){
     } else if (shape->shape_type==RECTANGLE){
         Pixel **pixels = NULL;
         pixel_rectangle(shape->ptrShape, &pixels, nb_pixels);
+        return pixels;
+
+    }else if (shape->shape_type==CIRCLE) {
+        Pixel **pixels = NULL;
+        pixel_circle(shape->ptrShape, &pixels, nb_pixels);
+        return pixels;
+
+    }else if (shape->shape_type==POLYGON){
+        Pixel **pixels = NULL;
+        pixel_polygon(shape->ptrShape, &pixels, nb_pixels);
         return pixels;
     }
 }

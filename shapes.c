@@ -77,3 +77,7 @@ void print_shape(Shape * shape){
        print_polygon(shape->ptrShape);
    }
 }
+
+void delete_shape(Shape * shape){
+    free(shape);
+}
