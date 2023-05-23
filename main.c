@@ -78,7 +78,6 @@ int main() {
                 Shape *s1 = create_point_shape(x1, y1);
                 add_shape_to_area(a1, s1);
                 draw_area(a1);
-                print_area(a1);
                 print_shape(s1);
 
 
@@ -89,7 +88,6 @@ int main() {
                 Shape *s1 = create_line_shape(x1, y1, x2, y2);
                 add_shape_to_area(a1, s1);
                 draw_area(a1);
-                print_area(a1);
                 print_shape(s1);
 
 
@@ -100,7 +98,6 @@ int main() {
                 Shape *s1 = create_circle_shape(x1, y1, radius);
                 add_shape_to_area(a1, s1);
                 draw_area(a1);
-                print_area(a1);
                 print_shape(s1);
 
 
@@ -111,7 +108,6 @@ int main() {
                 Shape *s1 = create_square_shape(x1, y1, length);
                 add_shape_to_area(a1, s1);
                 draw_area(a1);
-                print_area(a1);
                 print_shape(s1);
 
             } else if ((action) == '5') {
@@ -121,7 +117,6 @@ int main() {
                 Shape *s1 = create_rectangle_shape(x1, y1, width, height);
                 add_shape_to_area(a1, s1);
                 draw_area(a1);
-                print_area(a1);
                 print_shape(s1);
 
 

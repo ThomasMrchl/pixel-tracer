@@ -53,8 +53,11 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
 
     if (x1>x2) {
         int x3 = x1;
+        int y3 = y1;
         x1 = x2;
+        y1 = y2;
         x2 = x3;
+        y2 = y3;
     }
 
     dx = x2 - x1;
@@ -80,7 +83,7 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
 
     *nb_pixels = nombre_total_pixel;
 
-    *pixel = (Pixel **) malloc(sizeof(Pixel **) * *nb_pixels);
+    *pixel = (Pixel **) malloc(sizeof(Pixel *) * *nb_pixels);
 
     int *cumuls = (int*)malloc(nb_segs*sizeof(int));
 
@@ -94,14 +97,14 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
         if (dx > abs(dy)){
             int idx = 0;
             segments[0] = segments[0] - 1;
-            Pixel* p1 = create_pixel(x1, y1);
-            *pixel[idx] = p1;
+            Pixel* p5 = create_pixel(x1, y1);
+            *pixel[idx] = p5;
             idx++;
             for (int i=0; i<nb_segs;i++){
                 for (int j=0; j<segments[i]; j++){
                     x1++;
-                    Pixel* p1 = create_pixel(x1, y1);
-                    (*pixel)[idx] = p1;
+                    Pixel* p6 = create_pixel(x1, y1);
+                    (*pixel)[idx] = p6;
                     idx++;
                 }
                 y1--;
@@ -109,14 +112,14 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
         } else {
             int idx = 0;
             segments[0] = segments[0] - 1;
-            Pixel* p1 = create_pixel(x1, y1);
-            *pixel[idx] = p1;
+            Pixel* p7 = create_pixel(x1, y1);
+            *pixel[idx] = p7;
             idx++;
             for (int i=0; i<nb_segs;i++){
                 for (int j=0; j<segments[i]; j++){
                     y1++;
-                    Pixel* p1 = create_pixel(x1, y1);
-                    (*pixel)[idx] = p1;
+                    Pixel* p8 = create_pixel(x1, y1);
+                    (*pixel)[idx] = p8;
                     idx++;
                 }
                 x1--;
@@ -126,14 +129,14 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
         if (dx > dy){
             int idx = 0;
             segments[0] = segments[0] - 1;
-            Pixel* p1 = create_pixel(x1, y1);
-            *pixel[idx] = p1;
+            Pixel* p10 = create_pixel(x1, y1);
+            *pixel[idx] = p10;
             idx++;
             for (int i=0; i<nb_segs;i++){
                 for (int j=0; j<segments[i]; j++){
                     x1++;
-                    Pixel* p1 = create_pixel(x1, y1);
-                    (*pixel)[idx] = p1;
+                    Pixel* p11 = create_pixel(x1, y1);
+                    (*pixel)[idx] = p11;
                     idx++;
                 }
                 y1++;
@@ -141,14 +144,14 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
         } else {
             int idx = 0;
             segments[0] = segments[0] - 1;
-            Pixel *p1 = create_pixel(x1, y1);
-            *pixel[idx] = p1;
+            Pixel *p12 = create_pixel(x1, y1);
+            *pixel[idx] = p12;
             idx++;
             for (int i = 0; i < nb_segs; i++) {
                 for (int j = 0; j<segments[i]; j++) {
                     y1++;
-                    Pixel *p1 = create_pixel(x1, y1);
-                    (*pixel)[idx] = p1;
+                    Pixel *p13 = create_pixel(x1, y1);
+                    (*pixel)[idx] = p13;
                     idx++;
                 }
                 x1++;
@@ -391,9 +394,9 @@ void pixel_polygon(Polygon* polygon, Pixel*** pixel_tab, int* nb_pixels) {
         printf("ici");
         Line* l1;
         if (i < polygon->n - 1) {
-            l1 = create_line(polygon->points[i]->pos_x, polygon->points[i]->pos_y, polygon->points[i + 1]->pos_x, polygon->points[i + 1]->pos_y);
+            l1 = create_line(polygon->points[i+1]->pos_x, polygon->points[i+1]->pos_y, polygon->points[i]->pos_x, polygon->points[i]->pos_y);
         } else {
-            l1 = create_line(polygon->points[i]->pos_x, polygon->points[i]->pos_y, polygon->points[0]->pos_x, polygon->points[0]->pos_y);
+            l1 = create_line(polygon->points[0]->pos_x, polygon->points[0]->pos_y, polygon->points[i]->pos_x, polygon->points[i]->pos_y);
         }
 
         pixel_line(l1, &pixels_bis, nb_pixels);

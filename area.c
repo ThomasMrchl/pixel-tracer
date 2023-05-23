@@ -169,9 +169,9 @@ void print_area(Area* area){
     for (int i = 0 ; i<area->width ;i++){
         for (int j = 0; j<area->height ;j++){
             if (area->mat[i][j]==1){
-                printf("#");
+                printf(" #");
             } else {
-                printf(".");
+                printf(" .");
             }
         }
         printf("\n");
