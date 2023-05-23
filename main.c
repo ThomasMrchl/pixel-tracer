@@ -116,6 +116,9 @@ int main() {
                 printf("Enter the coordinates of the left corner of your rectangle and the width / heigth : x1 y1 width height\n");
                 scanf("%d %d %d %d", &x1, &y1, &width, &height);
                 Shape *s1 = create_rectangle_shape(x1, y1, width, height);
+                add_shape_to_area(a1, s1);
+                draw_area(a1);
+                print_area(a1);
                 print_shape(s1);
 
 
