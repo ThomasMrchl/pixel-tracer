@@ -51,19 +51,15 @@ void pixel_line(Line* line, Pixel*** pixel, int* nb_pixels){
     int dx;
     int dy;
 
-    if (x1>x2){
-        int x3=x1;
-        int y3=y1;
-        dx = x1 - x2;
-        dy = y1 - y2;
+    if (x1>x2) {
+        int x3 = x1;
         x1 = x2;
-        y1 = y2;
-        x2=x3;
-        y2=x3;
-    } else {
-        dx = x2 - x1;
-        dy = y2 - y1;
+        x2 = x3;
     }
+
+    dx = x2 - x1;
+    dy = y2 - y1;
+
 
     int dmin = min(dx, abs(dy));
     int dmax = max(dx, abs(dy));
@@ -392,15 +388,17 @@ void pixel_polygon(Polygon* polygon, Pixel*** pixel_tab, int* nb_pixels) {
     *pixel_tab = (Pixel**)malloc(sizeof(Pixel*) * polygon->n * (*nb_pixels));
 
     for (int i = 0; i < polygon->n; i++) {
+        printf("ici");
         Line* l1;
         if (i < polygon->n - 1) {
             l1 = create_line(polygon->points[i]->pos_x, polygon->points[i]->pos_y, polygon->points[i + 1]->pos_x, polygon->points[i + 1]->pos_y);
         } else {
-            // Connect the last point with the first point to close the polygon
             l1 = create_line(polygon->points[i]->pos_x, polygon->points[i]->pos_y, polygon->points[0]->pos_x, polygon->points[0]->pos_y);
         }
 
         pixel_line(l1, &pixels_bis, nb_pixels);
+
+        *pixel_tab = (Pixel**)realloc(*pixel_tab, sizeof(Pixel*) * (*nb_pixels + tempo_nb_pixels));
 
         for (int j = 0; j < *nb_pixels; j++) {
             (*pixel_tab)[tempo_nb_pixels + j] = pixels_bis[j];
@@ -414,6 +412,7 @@ void pixel_polygon(Polygon* polygon, Pixel*** pixel_tab, int* nb_pixels) {
     *nb_pixels = tempo_nb_pixels;
     free(pixels_bis);
 }
+
 
 
 Pixel** create_shape_to_pixel(Shape* shape, int* nb_pixels){

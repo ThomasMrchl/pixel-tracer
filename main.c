@@ -116,7 +116,7 @@ int main() {
 
             } else if ((action) == '5') {
                 int x1, y1, width, height;
-                printf("Enter the coordinates of the left corner of your rectangle and the width / heigth : x1 y1 width height\n");
+                printf("Enter the coordinates of the left corner of your rectangle and the width / heigth : x1 y1 width height :\n");
                 scanf("%d %d %d %d", &x1, &y1, &width, &height);
                 Shape *s1 = create_rectangle_shape(x1, y1, width, height);
                 add_shape_to_area(a1, s1);
@@ -127,7 +127,7 @@ int main() {
 
             } else if ((action) == '6') {
                 int n;
-                printf("Enter the number of points in your polygon (must be an even number)\n");
+                printf("Enter the number of points in your polygon :\n");
                 scanf("%d", &n);
                 Shape *s1 = create_polygon_shape(n);
                 add_shape_to_area(a1, s1);
